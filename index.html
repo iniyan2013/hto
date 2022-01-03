@@ -28,7 +28,6 @@
             }
             canvas{
                 size: small;
-                /*border-radius: 5000000000000000000000000000000000000000000px;*/
                 float: right;
             }
 
@@ -45,16 +44,12 @@
             This is my first webisite.
         </p>
         <form>
-            selestial body name:<br><input type="text" name="sb">
+            Celestial body name:<br><input type="text" name="sb">
             <br>
-            selestial body distance:<br><input type="number" name="nb">
+            Orbital distance in AU:<br><input type="number" name="nb">
         </form>
 
         <canvas id="myCanvas" width="200" height="200"  style="border:1px solid #000000;"></canvas>
-        <img src="images/hohmann.svg"alt="a Hohmann tranfer done few years ago ">
-        <svg>
-            <circle cx="50" cy="50" r="50" stroke="yellow" stroke-width="5" fill="yellow" >
-        </svg>
         <script>
             var c = document.getElementById("myCanvas");
             var ctx = c.getContext("2d");
