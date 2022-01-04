@@ -21,6 +21,7 @@
 
             }
 
+            
 
 
         </style>
@@ -29,13 +30,11 @@
         </header>
     </head>
     <body>
-         <p>
-             Hi I'm Iniyan, I'm in 3rd grade at BVMi,Chenai.This is my first webisite.              
-            Do you want to calulate Hohmann transfer orbit for interplanetary travel?
-            you have come to the right place!
+         <p>                     
+            Hello my name is Iniyan. This is my first webisite.
         </p>
         <form>
-            Celestial body name: <input type="text" name="sb" id="sb"/>
+            Celestial body name: <input type="text" name="sb"/>
             
             Orbital distance in AU: <input type="number" name="nb" id="nb"/>
             <br/>
@@ -78,11 +77,6 @@
             function degreesToRadians(degrees) {
                 return (degrees * Math.PI)/180;
             }
-            function write(x,y,text,color) {
-                ctx.fillStyle =color;
-                ctx.fillText (text,x,y,200);
-
-            }
             
             var c = document.getElementById("myCanvas");
             var ctx = c.getContext("2d");
@@ -90,38 +84,24 @@
             function plot() {
                 var canvas = document.getElementById("myCanvas");
                 ctx.clearRect(0,0,canvas.width,canvas.height);
-                
+                var eor = 100;
                 
                 var nb = document.getElementById("nb").value;
-                var sb = document.getElementById("sb").value
                 
                 if(nb == NaN || nb == "") {
                     alert("Enter orbital radius");
                     return;
                 } else {
-                    nb = Number(nb);
                     console.log(nb)
                 }
                 var tor = 200;
-                var eor = 100;
-                if(nb < 1) {
-                    eor = 200;
-                    tor = nb*eor;
-                } else if (nb < 2.5){
-                    eor = 100;
-                    tor = nb*eor;
-                } else if (nb<5){
-                    eor = 50;
-                    tor = nb*eor;
-                
+                if(Number(nb) < 2.5) {
+                    tor =  Number(nb)*100;
                 } else {
-                    eor = 50;
                     tor = 270;
                 }
                 //sun
-                solidcircle(500,300,20,"orange")
-                //lable sun
-                write(500,321.6,"Sun","grey");
+                solidcircle(500,300,29,"orange")
                 //earth orbit
                 circle(500,300,eor,"grey")
                 //target orbit
@@ -142,25 +122,14 @@
                 console.log(angDist +"is angDist")
                 var idealAngle = 180-angDist;
 
-
-
-
                 console.log(idealAngle +"is ideal")
                 ellipse(500-c,300,a,b,"black")
-                //hto lable
-                write(500-c,300-b-2,"Hohmann orbit","grey")
                 //earth
                 lineAtAngle(500,300,eor+25,0,"black")
-                solidcircle(500+eor,300,10,"teal")
-                //earth labele
-                write(500+eor,321.6,"Earth at launch","grey");
+                solidcircle(600,300,10,"teal")
                 //target
                 lineAtAngle(500,300,tor+25,idealAngle,"black")
                 solidcircle(500+ (tor * Math.cos(degreesToRadians(idealAngle))),300- (tor*Math.sin(degreesToRadians(idealAngle))),10,"red")
-                //target label
-                write(500+ (tor * Math.cos(degreesToRadians(idealAngle)))+10,300- (tor*Math.sin(degreesToRadians(idealAngle)))+10,sb+" at launch","grey");
-                //write period
-                write(500-100,10,"You will take "+Math.round(phto/2*365)+" days to reach "+sb,"grey")
              }
         </script>
         <p class="na"></p>
