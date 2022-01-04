@@ -44,8 +44,11 @@
         <form>
             Celestial body name: <input type="text" name="sb"/>
             
-            Orbital distance in AU: <input type="number" name="nb"/>
+            Orbital distance in AU: <input type="number" name="nb" id="nb"/>
             <br/>
+            <button type="button" onclick="plot()">
+                Draw Hohmann Transfer Orbit
+            </button>
             <br/>
         </form>
 
@@ -64,9 +67,6 @@
                 ctx.beginPath();
                 ctx.arc(x,y,radius,0,2*Math.PI);
                 ctx.fill();                
-
-
-
             }
             function ellipse(x,y,major,minor,color){
                 ctx.beginPath()
@@ -74,27 +74,29 @@
                 ctx.strokeStyle = color;
                 ctx.stroke();
             }
+            
             var c = document.getElementById("myCanvas");
             var ctx = c.getContext("2d");
-            var eor = 100;
-            var tor = 200;
+            
+            function plot() {
+                
+                var eor = 100;
+                console.log(document.getElementById("nb").value)
+                var tor = 200;
 
-            //sun
-            solidcircle(500,300,20,"orange")
-            //earth orbit
-            circle(500,300,eor,"grey")
-            //target orbit
-            circle(500,300,tor,"red")
-            //hto
-            var a = (eor+tor)/2;
-            var c = a-eor;
-            var b = Math.sqrt(a*a-c*c);
-            console.log(a);
-            console.log(b);
-            console.log(c);
+                //sun
+                solidcircle(500,300,20,"orange")
+                //earth orbit
+                circle(500,300,eor,"grey")
+                //target orbit
+                circle(500,300,tor,"red")
+                //hto
+                var a = (eor+tor)/2;
+                var c = a-eor;
+                var b = Math.sqrt(a*a-c*c);
+                ellipse(500-c,300,a,b,"black")
 
-            ellipse(500-c,300,a,b,"black")
-
+             }
         </script>
     </body>
 </html>
