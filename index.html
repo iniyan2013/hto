@@ -74,18 +74,42 @@
                 ctx.strokeStyle = color;
                 ctx.stroke();
             }
+            function lineAtAngle(x1, y1, length, angle,color) {
+                 ctx.beginPath();
+                 ctx.moveTo(x1, y1);
+                 ctx.lineTo(x1 + length * Math.cos(degreesToRadians(angle)), y1 - length * Math.sin(degreesToRadians(angle)));                 
+                 ctx.strokeStyle = color;
+                 //ctx.closePath();
+                 ctx.stroke();
+            }
+            function degreesToRadians(degrees) {
+                return (degrees * Math.PI)/180;
+            }
             
             var c = document.getElementById("myCanvas");
             var ctx = c.getContext("2d");
             
             function plot() {
-                
+                var canvas = document.getElementById("myCanvas");
+                ctx.clearRect(0,0,canvas.width,canvas.height);
                 var eor = 100;
-                console.log(document.getElementById("nb").value)
+                
+                var nb = document.getElementById("nb").value;
+                
+                if(nb == NaN || nb == "") {
+                    alert("Enter orbital radius");
+                    return;
+                } else {
+                    console.log(nb)
+                }
                 var tor = 200;
-
+                if(Number(nb) < 3) {
+                    tor =  Number(nb)*100;
+                } else {
+                    tor = 330;
+                }
                 //sun
-                solidcircle(500,300,20,"orange")
+                solidcircle(500,300,29,"orange")
                 //earth orbit
                 circle(500,300,eor,"grey")
                 //target orbit
@@ -94,9 +118,28 @@
                 var a = (eor+tor)/2;
                 var c = a-eor;
                 var b = Math.sqrt(a*a-c*c);
-                ellipse(500-c,300,a,b,"black")
+                var mhto = Number(nb)+1;
+                console.log(mhto +"is mhto"+(mhto/2))
+                var smhto = mhto/2;
+                console.log(smhto +"is smhto")
+                var phto = Math.sqrt(smhto*smhto*smhto);
+                var ptgt = Math.sqrt(nb*nb*nb);
+                var angDist = (360*phto)/(2*ptgt);
+                console.log(phto +"is phto")
+                console.log(ptgt +"is ptgt")
+                console.log(angDist +"is angDist")
+                var idealAngle = 180-angDist;
 
+                console.log(idealAngle +"is ideal")
+                ellipse(500-c,300,a,b,"black")
+                //earth
+                lineAtAngle(500,300,eor+25,0,"black")
+                solidcircle(600,300,10,"teal")
+                //target
+                lineAtAngle(500,300,tor+25,idealAngle,"black")
+                solidcircle(500+ (tor * Math.cos(degreesToRadians(idealAngle))),300- (tor*Math.sin(degreesToRadians(idealAngle))),10,"red")
              }
         </script>
+        <p class="na"></p>
     </body>
 </html>
