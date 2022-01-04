@@ -68,6 +68,12 @@
 
 
             }
+            function ellipse(x,y,major,minor,color){
+                ctx.beginPath()
+                ctx.ellipse(x,y,major,minor,0,0,2*Math.PI);
+                ctx.strokeStyle = color;
+                ctx.stroke();
+            }
             var c = document.getElementById("myCanvas");
             var ctx = c.getContext("2d");
             var eor = 100;
@@ -79,6 +85,15 @@
             circle(500,300,eor,"grey")
             //target orbit
             circle(500,300,tor,"red")
+            //hto
+            var a = (eor+tor)/2;
+            var c = a-eor;
+            var b = Math.sqrt(a*a-c*c);
+            console.log(a);
+            console.log(b);
+            console.log(c);
+
+            ellipse(500-c,300,a,b,"black")
 
         </script>
     </body>
