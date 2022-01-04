@@ -39,22 +39,47 @@
     </head>
     <body>
          <p>                     
-            Hello my name is Iniyan .
-            This is my first webisite.
+            Hello my name is Iniyan. This is my first webisite.
         </p>
         <form>
-            Celestial body name:<br><input type="text" name="sb">
-            <br>
-            Orbital distance in AU:<br><input type="number" name="nb">
+            Celestial body name: <input type="text" name="sb"/>
+            
+            Orbital distance in AU: <input type="number" name="nb"/>
+            <br/>
+            <br/>
         </form>
 
-        <canvas id="myCanvas" width="200" height="200"  style="border:1px solid #000000;"></canvas>
+        <canvas id="myCanvas" width="1000" height="600"  style="border:1px solid #000000;"></canvas>
         <script>
+            function circle(x,y,radius,linecolor) {
+                console.log(x)
+                ctx.beginPath();
+                ctx.arc(x,y,radius,0,2*Math.PI);
+                ctx.strokeStyle=linecolor;
+                ctx.stroke();
+
+            }
+            function solidcircle(x,y,radius,fillcolor){
+                ctx.fillStyle = fillcolor;
+                ctx.beginPath();
+                ctx.arc(x,y,radius,0,2*Math.PI);
+                ctx.fill();                
+
+
+
+            }
             var c = document.getElementById("myCanvas");
             var ctx = c.getContext("2d");
-            ctx.moveTo(0, 0);
-            ctx.lineTo(200, 100);
-            ctx.stroke();
+            var eor = 100;
+            var tor = 200;
+
+            //sun
+            solidcircle(500,300,20,"orange")
+            //earth orbit
+            circle(500,300,eor,"grey")
+            //target orbit
+            circle(500,300,tor,"red")
+
         </script>
     </body>
 </html>
